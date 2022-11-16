@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
 using WebAPITemplate.API.Data;
 using WebAPITemplate.API.Interceptors;
+using WebAPITemplate.API.Middlewares;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 {
@@ -34,6 +35,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
         ServiceLifetime.Scoped);
 
     builder.Services.AddSingleton<UpdateAuditableEntitiesInterceptor>();
+    
+    
+    builder.Services.AddScoped<ErrorHandlerMiddleware>();
 }
 
 WebApplication app = builder.Build();
@@ -45,6 +49,8 @@ WebApplication app = builder.Build();
         app.UseSwaggerUI();
     }
 
+    app.UseMiddleware<ErrorHandlerMiddleware>();
+    
     app.UseHttpsRedirection();
 
     app.UseAuthentication();
