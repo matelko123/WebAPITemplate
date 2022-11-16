@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPITemplate.API", "WebAPITemplate.API\WebAPITemplate.API.csproj", "{8F1E1DF4-BE02-4193-B3A5-16DFA0F33C1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPITemplate.Shared", "WebAPITemplate.Shared\WebAPITemplate.Shared.csproj", "{740785E4-6EDC-4DD7-8100-F60139877547}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{8F1E1DF4-BE02-4193-B3A5-16DFA0F33C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F1E1DF4-BE02-4193-B3A5-16DFA0F33C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F1E1DF4-BE02-4193-B3A5-16DFA0F33C1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{740785E4-6EDC-4DD7-8100-F60139877547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{740785E4-6EDC-4DD7-8100-F60139877547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{740785E4-6EDC-4DD7-8100-F60139877547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{740785E4-6EDC-4DD7-8100-F60139877547}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
