@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
 using WebAPITemplate.API.Data;
+using WebAPITemplate.API.Interceptors;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 {
@@ -31,6 +32,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             .UseSqlServer(builder.Configuration.GetConnectionString("Default"))
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking),
         ServiceLifetime.Scoped);
+
+    builder.Services.AddSingleton<UpdateAuditableEntitiesInterceptor>();
 }
 
 WebApplication app = builder.Build();
