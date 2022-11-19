@@ -38,7 +38,6 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
     
     
     builder.Services.AddScoped<ErrorHandlerMiddleware>();
-    builder.Services.AddScoped<RequestTimeMiddleware>();
 }
 
 WebApplication app = builder.Build();
@@ -51,7 +50,6 @@ WebApplication app = builder.Build();
     }
 
     app.UseMiddleware<ErrorHandlerMiddleware>();
-    app.UseMiddleware<RequestTimeMiddleware>();
     
     app.UseHttpsRedirection();
 
