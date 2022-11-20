@@ -14,12 +14,23 @@ public class UserRepository : IUserRepository
         _contextFactory = contextFactory;
     }
 
+    /// <summary>
+    /// Get all users from DB
+    /// </summary>
+    /// <returns>All users</returns>
     public async Task<IEnumerable<User>> GetAll()
     {
         await using AppDbContext context = await _contextFactory.CreateDbContextAsync();
         return await context.Users.ToListAsync();
     }
 
+    /// <summary>
+    /// Get user by user's ID
+    /// </summary>
+    /// <param name="userId">User's id</param>
+    /// <returns>User</returns>
+    /// <exception cref="NotFoundException">User not found.</exception>
+    /// <exception cref="InvalidOperationException">More than one user was found.</exception>
     public async Task<User> GetById(Guid userId)
     {
         await using AppDbContext context = await _contextFactory.CreateDbContextAsync();
@@ -27,6 +38,14 @@ public class UserRepository : IUserRepository
         return user ?? throw new NotFoundException($"User {userId} not found.");
     }
 
+    /// <summary>
+    /// Get user by user's name
+    /// </summary>
+    /// <param name="username">User's name</param>
+    /// <returns>User</returns>
+    /// <exception cref="ArgumentNullException">User's name was null</exception>
+    /// <exception cref="NotFoundException">User not found.</exception>
+    /// <exception cref="InvalidOperationException">More than one user was found.</exception>
     public async Task<User> GetByUsername(string username)
     {
         if (string.IsNullOrEmpty(username))
@@ -37,6 +56,12 @@ public class UserRepository : IUserRepository
         return user ?? throw new NotFoundException($"User {username} not found.");
     }
 
+    /// <summary>
+    /// Add user to DB
+    /// </summary>
+    /// <param name="user">New user</param>
+    /// <returns>Created user</returns>
+    /// <exception cref="ArgumentNullException">User was null.</exception>
     public async Task<User> Add(User user)
     {
         if(user is null)
@@ -50,6 +75,12 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+    /// <summary>
+    /// Update user
+    /// </summary>
+    /// <param name="user">User</param>
+    /// <returns>Updated user</returns>
+    /// <exception cref="ArgumentNullException">User was null</exception>
     public async Task<User> Update(User user)
     {
         if(user is null)
@@ -63,6 +94,13 @@ public class UserRepository : IUserRepository
         return user;
     }
     
+    /// <summary>
+    /// Delete user from DB
+    /// </summary>
+    /// <param name="userId">User's id</param>
+    /// <returns>True - if user is deleted, False - otherwise</returns>
+    /// <exception cref="NotFoundException">User not found.</exception>
+    /// <exception cref="InvalidOperationException">More than one user was found.</exception>
     public async Task<bool> Delete(Guid userId)
     {
         await using AppDbContext context = await _contextFactory.CreateDbContextAsync();
