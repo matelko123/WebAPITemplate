@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
 using WebAPITemplate.API.Data;
+using WebAPITemplate.API.Extensions;
 using WebAPITemplate.API.Interceptors;
 using WebAPITemplate.API.Middlewares;
+using WebAPITemplate.API.Repositories;
+using WebAPITemplate.API.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 {
@@ -13,6 +16,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services.RegisterMapsterConfiguration();
+    
     builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
         .AddNegotiate();
 
@@ -36,6 +41,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddSingleton<UpdateAuditableEntitiesInterceptor>();
     
+    builder.Services.AddScoped<IUserRepository, UserRepository>();
+    builder.Services.AddScoped<IUserService, UserService>();
     
     builder.Services.AddScoped<ErrorHandlerMiddleware>();
 }
