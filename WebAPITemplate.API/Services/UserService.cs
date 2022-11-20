@@ -33,7 +33,7 @@ public class UserService : IUserService
         return user.Adapt<UserDto>();
     }
 
-    public async Task<UserDto> Add(UserAddRequest user)
+    public async Task<UserDto> Add(UserRegistrationRequest user)
     {
         User createdUser = await _userRepository.Add(user.Adapt<User>());
         return createdUser.Adapt<UserDto>();

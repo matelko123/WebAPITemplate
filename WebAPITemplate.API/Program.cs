@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
 using WebAPITemplate.API.Data;
 using WebAPITemplate.API.Extensions;
@@ -14,19 +13,12 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
     builder.Services.AddControllers();
     
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
 
+    // Extensions
+    builder.AddSecurityServices();
     builder.Services.RegisterMapsterConfiguration();
-    
-    builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-        .AddNegotiate();
 
-    builder.Services.AddAuthorization(options =>
-    {
-        // By default, all incoming requests will be authorized according to the default policy.
-        options.FallbackPolicy = options.DefaultPolicy;
-    });
-    
+    // DbContext
     builder.Services.AddDbContext<AppDbContext>(
         options => options
             .UseSqlServer(builder.Configuration.GetConnectionString("Default"))

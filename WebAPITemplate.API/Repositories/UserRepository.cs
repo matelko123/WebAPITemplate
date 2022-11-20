@@ -69,6 +69,9 @@ public class UserRepository : IUserRepository
         
         await Validate(user);
         
+        // hash password
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+        
         await using AppDbContext context = await _contextFactory.CreateDbContextAsync();
         await context.Users.AddAsync(user);
         await context.SaveChangesAsync();

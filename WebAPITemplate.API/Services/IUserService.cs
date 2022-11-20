@@ -9,7 +9,7 @@ public interface IUserService
     Task<UserDto> GetById(Guid userId);
     Task<UserDto> GetByUsername(string username);
 
-    Task<UserDto> Add(UserAddRequest user);
+    Task<UserDto> Add(UserRegistrationRequest user);
     Task<UserDto> Update(UserUpdateRequest user);
 
     Task<bool> Delete(Guid userId);

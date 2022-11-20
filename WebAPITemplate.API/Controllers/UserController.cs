@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebAPITemplate.API.Services;
 using WebAPITemplate.Shared.Models.Requests.User;
 using WebAPITemplate.Shared.Models.Responses;
@@ -7,6 +8,7 @@ namespace WebAPITemplate.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class UserController : Controller
 {
     private readonly IUserService _userService;
@@ -27,13 +29,6 @@ public class UserController : Controller
     [HttpGet("{username}")]
     public async Task<ActionResult<UserDto>> GetByUsername([FromRoute] string username)
         => Ok(await _userService.GetByUsername(username));
-
-    [HttpPost]
-    public async Task<ActionResult<UserDto>> Add([FromBody] UserAddRequest user)
-    {
-        UserDto createdUser = await _userService.Add(user);
-        return Created($"/{createdUser.Id}", createdUser);
-    }
 
     [HttpPut]
     public async Task<ActionResult<UserDto>> Update([FromBody] UserUpdateRequest user)

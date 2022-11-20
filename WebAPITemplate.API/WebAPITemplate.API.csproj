@@ -7,7 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="Mapster" Version="7.4.0-pre03" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="6.0.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
@@ -21,6 +23,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\WebAPITemplate.Shared\WebAPITemplate.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="System.Configuration.ConfigurationManager">
+        <HintPath>bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
